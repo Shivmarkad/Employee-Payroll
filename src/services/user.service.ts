@@ -22,8 +22,12 @@ class UserService {
   public signIn = async (body) => {
     const data = await this.User.findOne({where: {email: body.email}});
     if(!data) throw new Error("User not Found !!")
+    const isTrue = bcrypt.compareSync(body.password, data.password);
+    if(isTrue){
     const token = jwt.sign({email: data.email, id: data.id},process.env.SECRET_KEY)
     return token;
+    }
+    throw new Error("Password incorrect !!")
   };
 }
 
