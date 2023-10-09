@@ -32,6 +32,26 @@ class EmployeeController {
       });
     }
   };
+
+  public addEmployees = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<any> => {
+    try {
+      const data = await this.EmployeeService.addEmployees(req.body);
+      res.status(HttpStatus.CREATED).json({
+        code: HttpStatus.CREATED,
+        data: data,
+        message: 'Employee details added successfully'
+      });
+    } catch (error) {
+      res.status(HttpStatus.BAD_REQUEST).json({
+        code: HttpStatus.BAD_REQUEST,
+        message: error.message
+      });
+    }
+  };
 }
 
 export default EmployeeController;

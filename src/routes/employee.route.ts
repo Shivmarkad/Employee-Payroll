@@ -14,6 +14,9 @@ class EmployeeRoutes {
 
     //route for get all employees
     this.router.get('',userAuth, this.employeeController.getEmployees);
+
+    //route for get all employees
+    this.router.post('',userAuth, this.employeeController.addEmployees);
   
   };
   
