@@ -16,6 +16,12 @@ class EmployeeService {
     const data = await this.Employee.create(body);
     return data;
   };
+
+   //remove employees details
+   public removeEmployeeDetails = async (empId):Promise<any> => {
+    const data = await this.Employee.destroy({where: {id: empId}});
+    return data;
+  };
 }
 
 export default EmployeeService;
