@@ -3,6 +3,8 @@ import { IUser } from '../interfaces/user.interface';
 import  jwt  from 'jsonwebtoken';
 import user from '../models/user';
 import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
+dotenv.config();
 
 class UserService {
   private User = user(sequelize, DataTypes);
