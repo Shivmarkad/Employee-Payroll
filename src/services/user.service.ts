@@ -2,16 +2,20 @@ import sequelize, { DataTypes } from '../config/database';
 import { IUser } from '../interfaces/user.interface';
 import  jwt  from 'jsonwebtoken';
 import user from '../models/user';
+import bcrypt from 'bcrypt';
 
 class UserService {
   private User = user(sequelize, DataTypes);
 
   //create a new user
-  public signUp = async (body) => {
+  public signUp = async (body: IUser) => {
     const user = await this.User.findOne({where: {email: body.email}});
     if(user) throw new Error("User already registered !!")
+    const saltRounds = 10;
+    const hash = bcrypt.hashSync(body.password, saltRounds);
+    body.password = hash;
     const data = await this.User.create(body);
-    return data;
+    return data.email;
   };
 
   //Login user
