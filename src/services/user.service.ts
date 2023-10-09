@@ -1,41 +1,33 @@
 import sequelize, { DataTypes } from '../config/database';
 import { IUser } from '../interfaces/user.interface';
-
+import  jwt  from 'jsonwebtoken';
 import user from '../models/user';
+import bcrypt from 'bcrypt';
 
 class UserService {
   private User = user(sequelize, DataTypes);
 
-  //get all users
-  public getAllUsers = async (): Promise<IUser[]> => {
-    const data = await this.User.findAll();
-    return data;
-  };
-
   //create a new user
-  public newUser = async (body) => {
+  public signUp = async (body: IUser) => {
+    const user = await this.User.findOne({where: {email: body.email}});
+    if(user) throw new Error("User already registered !!")
+    const saltRounds = 10;
+    const hash = bcrypt.hashSync(body.password, saltRounds);
+    body.password = hash;
     const data = await this.User.create(body);
-    return data;
+    return data.email;
   };
 
-  //update a user
-  public updateUser = async (id, body) => {
-    await this.User.update(body, {
-      where: { id: id }
-    });
-    return body;
-  };
-
-  //delete a user
-  public deleteUser = async (id) => {
-    await this.User.destroy({ where: { id: id } });
-    return '';
-  };
-
-  //get a single user
-  public getUser = async (id) => {
-    const data = await this.User.findByPk(id);
-    return data;
+  //Login user
+  public signIn = async (body) => {
+    const data = await this.User.findOne({where: {email: body.email}});
+    if(!data) throw new Error("User not Found !!")
+    const isTrue = bcrypt.compareSync(body.password, data.password);
+    if(isTrue){
+    const token = jwt.sign({email: data.email, id: data.id},process.env.SECRET_KEY)
+    return token;
+    }
+    throw new Error("Password incorrect !!")
   };
 }
 
