@@ -10,6 +10,7 @@ export default (sequelize, DataTypes) => {
     public lastName;
     public email;
     public password;
+    public id;
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
