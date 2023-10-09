@@ -20,6 +20,13 @@ class UserRoutes {
       this.UserValidator.newUser,
       this.UserController.signUp
     );
+    
+    //route to login user
+    this.router.post(
+      '/login',
+      this.UserController.signIn
+    );
+
   };
   
 
