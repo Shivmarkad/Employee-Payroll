@@ -21,6 +21,8 @@ class EmployeeRoutes {
     //route for remove employee details
     this.router.put('/:empId',userAuth, this.employeeController.removeEmployeeDetails);
   
+    //route for update employee details
+    this.router.put('/update/:empId',userAuth, this.employeeController.updateEmployeeDetails);
   };
   
   public getRoutes = (): IRouter => {
