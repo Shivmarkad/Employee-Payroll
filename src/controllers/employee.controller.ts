@@ -52,6 +52,46 @@ class EmployeeController {
       });
     }
   };
+
+  public removeEmployeeDetails = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<any> => {
+    try {
+      const data = await this.EmployeeService.removeEmployeeDetails(req.params.empId);
+      res.status(HttpStatus.OK).json({
+        code: HttpStatus.OK,
+        data: data,
+        message: 'Employee details removed successfully'
+      });
+    } catch (error) {
+      res.status(HttpStatus.BAD_REQUEST).json({
+        code: HttpStatus.BAD_REQUEST,
+        message: error.message
+      });
+    }
+  };
+
+  public updateEmployeeDetails = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<any> => {
+    try {
+      const data = await this.EmployeeService.updateEmployeeDetails(req.params.empId,req.body);
+      res.status(HttpStatus.OK).json({
+        code: HttpStatus.OK,
+        data: data,
+        message: 'Employee details updated successfully'
+      });
+    } catch (error) {
+      res.status(HttpStatus.BAD_REQUEST).json({
+        code: HttpStatus.BAD_REQUEST,
+        message: error.message
+      });
+    }
+  };
 }
 
 export default EmployeeController;
