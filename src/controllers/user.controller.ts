@@ -32,6 +32,26 @@ class UserController {
       });
     }
   };
+
+  public signIn = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<any> => {
+    try {
+      const data = await this.UserService.signIn(req.body);
+      res.status(HttpStatus.OK).json({
+        code: HttpStatus.OK,
+        data: data,
+        message: 'User logged In successfully'
+      });
+    } catch (error) {
+      res.status(HttpStatus.UNAUTHORIZED).json({
+        code: HttpStatus.UNAUTHORIZED,
+        message: error.message
+      });
+    }
+  };
 }
 
 export default UserController;
