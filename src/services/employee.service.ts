@@ -11,6 +11,11 @@ class EmployeeService {
     return data;
   };
 
+  //Add employees details
+  public addEmployees = async (body: IEmployee):Promise<any> => {
+    const data = await this.Employee.create(body);
+    return data;
+  };
 }
 
 export default EmployeeService;
