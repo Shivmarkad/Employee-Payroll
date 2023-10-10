@@ -15,6 +15,9 @@ class EmployeeRoutes {
     //route for get all employees
     this.router.get('',userAuth, this.employeeController.getEmployees);
 
+    //route for get highest salary employee details
+    this.router.get('/hs',userAuth, this.employeeController.getHSEmployeeDetails);
+
     //route for add employee details
     this.router.post('',userAuth, this.employeeController.addEmployees);
 
