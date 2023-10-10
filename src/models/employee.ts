@@ -26,7 +26,7 @@ export default (sequelize, DataTypes) => {
       role: DataTypes.STRING,
       gender: DataTypes.STRING,
       salary: DataTypes.INTEGER,
-      DOJ : DataTypes.DATE
+      DOJ : DataTypes.STRING
     },
     {
       sequelize,
