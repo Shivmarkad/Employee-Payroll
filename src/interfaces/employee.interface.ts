@@ -3,6 +3,6 @@ export interface IEmployee {
     role: string,
     gender: string,
     salary: number,
-    DOJ: Date,
+    DOJ: string,
     id?: string | number;
 }
