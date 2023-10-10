@@ -42,6 +42,27 @@ class EmployeeService {
     });
     return data;
   };
+
+  //get employee details with date of join
+  public getmployeeByDoj = async (doj):Promise<any> => {
+    const data = await this.Employee.findAll({
+      where:{
+        DOJ: {  [Op.eq]:  doj }
+      },   
+      order: ['name']
+    });
+    return data;
+  };
+
+  //get employee details with date of join
+  public getcount = async (doj):Promise<any> => {
+    const data = await this.Employee.count({
+      where:{
+        DOJ: {  [Op.eq]:  doj }
+      }
+    });
+    return data;
+  };
 }
 
 export default EmployeeService;
