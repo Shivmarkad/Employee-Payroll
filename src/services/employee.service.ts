@@ -54,7 +54,7 @@ class EmployeeService {
     return data;
   };
 
-  //get employee details with date of join
+  //get count of employee joined on same date
   public getcount = async (doj):Promise<any> => {
     const data = await this.Employee.count({
       where:{
