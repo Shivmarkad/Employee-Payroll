@@ -16,12 +16,12 @@ class EmployeeRoutes {
     this.router.get('',userAuth, this.employeeController.getEmployees);
 
     //route for get highest salary employee details
-    this.router.get('/hs',userAuth, this.employeeController.getHSEmployeeDetails);
+    this.router.get('/highsal',userAuth, this.employeeController.getHSEmployeeDetails);
 
-    //route for get highest salary employee details
+    //route to get employees details having same date of join
     this.router.get('/doj',userAuth, this.employeeController.getEmployeeByDoj);
 
-    //route for get highest salary employee details
+    //route to get count of employees joined on same date
     this.router.get('/doj/count',userAuth, this.employeeController.getCount);
 
     //route for add employee details
